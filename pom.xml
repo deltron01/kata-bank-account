@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.kata.tech</groupId>
+	<artifactId>bank-operations</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>bank-operations</name>
+	<description>Sample project for Banking customer operations</description>
+	<properties>
+		<java.version>11</java.version>
+		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
+		<!-- BEGIN dependencies for Swagger documentation and OpenApi Model generator -->
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>7.0.1.Final</version>
+		</dependency>
+		<!-- END dependencies for Swagger documentation and OpenApi Model generator -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!--https://openapi-generator.tech/docs/plugins/-->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>5.1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildApiDTOs</id>
+						<configuration>
+
+							<!-- path to the specification -->
+							<inputSpec>${basedir}/src/main/resources/api/KATA_banking.yaml</inputSpec>
+
+							<!--https://openapi-generator.tech/docs/generators/spring -->
+							<generatorName>spring</generatorName>
+							<library>spring-boot</library>
+
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<generateApis>false</generateApis>
+							<generateModels>true</generateModels>
+							<generateApiTests>false</generateApiTests>
+
+							<!-- ... lot of parameters and configuration omitted here, look in the original file ... -->
+
+							<!-- configuration -->
+							<configOptions>
+								<interfaceOnly>true</interfaceOnly>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>com.kata.tech.openapi</modelPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
