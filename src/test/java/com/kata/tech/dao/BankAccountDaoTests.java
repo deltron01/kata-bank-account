@@ -1,7 +1,7 @@
 package com.kata.tech.dao;
 
 
-import com.kata.tech.exception.BusinessExcpetion;
+import com.kata.tech.exception.BusinessException;
 import com.kata.tech.model.BankAccount;
 import com.kata.tech.model.BankAccountType;
 import com.kata.tech.model.BankUser;
@@ -117,7 +117,7 @@ public class BankAccountDaoTests {
             BankAccount bankAccountAfterDeposit = bankAccountDao.depositMoneyInAccount(bankAccount, moneyAmount);
             Assertions.assertEquals(balanceBeforeDeposit + moneyAmount, bankAccountAfterDeposit.getBalance());
 
-        } catch (BusinessExcpetion businessExcpetion) {
+        } catch (BusinessException businessException) {
             Assertions.fail();
         }
 
@@ -135,15 +135,9 @@ public class BankAccountDaoTests {
             BankAccount bankAccountAfterWithdrawal = bankAccountDao.withdrawMoneyFromAccount(bankAccount, moneyAmount);
             Assertions.assertEquals(balanceBeforeWithdrawal - moneyAmount, bankAccountAfterWithdrawal.getBalance());
 
-        } catch (BusinessExcpetion businessExcpetion) {
+        } catch (BusinessException businessException) {
             Assertions.fail();
         }
-    }
-
-
-
-    void testWithdrawMoneyInAccountInsufficientFunds(){
-
     }
 
 }

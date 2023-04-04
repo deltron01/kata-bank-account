@@ -8,5 +8,4 @@ import java.util.List;
 public interface BankUserService {
 
     BankUser findUserById(Long userId);
-    List<BankAccount> findBankAcountsByUser(BankUser user);
 }

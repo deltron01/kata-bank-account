@@ -1,6 +1,6 @@
 package com.kata.tech.dao;
 
-import com.kata.tech.exception.BusinessExcpetion;
+import com.kata.tech.exception.BusinessException;
 import com.kata.tech.exception.ErrorCategory;
 import com.kata.tech.exception.ErrorDTO;
 import com.kata.tech.model.BankAccount;
@@ -35,28 +35,25 @@ public class BankAccountDaoImpl implements BankAccountDao {
     }
 
     @Override
-    public BankAccount depositMoneyInAccount(BankAccount account, Double moneyAmount) throws BusinessExcpetion {
+    public BankAccount depositMoneyInAccount(BankAccount account, Double moneyAmount) throws BusinessException {
         Optional<BankAccount> bankAccountOptional = bankAccountRepository.findByAccountNumber(account.getAccountNumber());
         if(!bankAccountOptional.isPresent()){
             ErrorDTO errorDTO = new ErrorDTO(ErrorCategory.NOT_FOUND.getErrorNumber(), new StringBuilder(ErrorCategory.NOT_FOUND.name()).append(" no BankAccount corresponds to the given accountNumber").toString());
-            throw new BusinessExcpetion(errorDTO);
+            throw new BusinessException(errorDTO);
         }
         BankAccount bankAccount = bankAccountOptional.get();
-        //bankAccountRepository.updateBalance(bankAccount.getId(), bankAccount.getBalance() + moneyAmount);
         bankAccount.setBalance(bankAccount.getBalance() + moneyAmount);
         return bankAccountRepository.save(bankAccount);
     }
 
     @Override
-    public BankAccount withdrawMoneyFromAccount(BankAccount account, Double moneyAmount) throws BusinessExcpetion {
+    public BankAccount withdrawMoneyFromAccount(BankAccount account, Double moneyAmount) throws BusinessException {
         Optional<BankAccount> bankAccountOptional = bankAccountRepository.findByAccountNumber(account.getAccountNumber());
         if(!bankAccountOptional.isPresent()){
             ErrorDTO errorDTO = new ErrorDTO(ErrorCategory.NOT_FOUND.getErrorNumber(), new StringBuilder(ErrorCategory.NOT_FOUND.name()).append(" no BankAccount corresponds to the given accountNumber").toString());
-            throw new BusinessExcpetion(errorDTO);
+            throw new BusinessException(errorDTO);
         }
         BankAccount bankAccount = bankAccountOptional.get();
-        //bankAccountRepository.updateBalance(bankAccount.getId(), bankAccount.getBalance() - moneyAmount);
-
         bankAccount.setBalance(bankAccount.getBalance() - moneyAmount);
         return bankAccountRepository.save(bankAccount);
     }

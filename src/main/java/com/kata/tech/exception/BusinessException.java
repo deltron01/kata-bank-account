@@ -1,15 +1,15 @@
 package com.kata.tech.exception;
 
-public class BusinessExcpetion extends Exception {
+public class BusinessException extends Exception {
 
     private ErrorDTO errorDTO;
 
-    public BusinessExcpetion(String message, Throwable cause, ErrorDTO errorDTO) {
+    public BusinessException(String message, Throwable cause, ErrorDTO errorDTO) {
         super(message, cause);
         this.errorDTO = errorDTO;
     }
 
-    public BusinessExcpetion(ErrorDTO errorDTO) {
+    public BusinessException(ErrorDTO errorDTO) {
         this.errorDTO = errorDTO;
     }
 
