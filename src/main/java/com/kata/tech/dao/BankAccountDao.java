@@ -1,13 +1,17 @@
 package com.kata.tech.dao;
 
+import com.kata.tech.exception.BusinessExcpetion;
 import com.kata.tech.model.BankAccount;
+import com.kata.tech.model.BankUser;
+
+import java.util.List;
 
 public interface BankAccountDao {
 
     BankAccount findBankAccountById(Long accountId);
     BankAccount findBankAccountByAccountNumber(String accountNumber);
-    Double depositMoneyInAccount(BankAccount account, Double moneyAmount);
-    Double withdrawMoneyInAccount(BankAccount account, Double moneyAmount);
-
+    List<BankAccount> findBankAcountsByUser(BankUser user);
+    BankAccount depositMoneyInAccount(BankAccount account, Double moneyAmount) throws BusinessExcpetion;
+    BankAccount withdrawMoneyFromAccount(BankAccount account, Double moneyAmount) throws BusinessExcpetion;
 
 }

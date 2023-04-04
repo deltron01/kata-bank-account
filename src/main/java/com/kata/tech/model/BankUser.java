@@ -60,4 +60,63 @@ public class BankUser {
     public void setBankAccounts(List<BankAccount> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
+
+    // Default constructor
+    public BankUser() {
+    }
+
+    public BankUser(BankUserBuilder builder) {
+        this.id = builder.getId();
+        this.firstName = builder.getFirstName();
+        this.lastName = builder.getLastName();
+        this.customerIdentifier = builder.getCustomerIdentifier();
+    }
+
+    public static class BankUserBuilder {
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private String customerIdentifier;
+
+        public BankUserBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BankUserBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public BankUserBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public BankUserBuilder customerIdentifier(String customerIdentifier) {
+            this.customerIdentifier = customerIdentifier;
+            return this;
+        }
+        // Builder method
+        public BankUser build(){
+            return  new BankUser(this);
+        }
+        // Getters of the builder class
+
+        public Long getId() {
+            return id;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public String getCustomerIdentifier() {
+            return customerIdentifier;
+        }
+    }
 }

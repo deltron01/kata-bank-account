@@ -55,6 +55,68 @@ public class BankAccount {
     public void setOwner(BankUser owner) {
         this.owner = owner;
     }
+
+    public BankAccount(BankAccountBuilder builder) {
+        this.id = builder.getId();
+        this.accountNumber = builder.getAccountNumber();
+        this.accountType = builder.getAccountType();
+        this.balance = builder.getBalance();
+    }
+
+    // Default constructor
+    public BankAccount() {
+    }
+
+    public static class BankAccountBuilder {
+        private Long id;
+        private BankAccountType accountType;
+        private String accountNumber;
+        private Double balance;
+
+        public BankAccountBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BankAccountBuilder accountType(BankAccountType accountType) {
+            this.accountType = accountType;
+            return this;
+        }
+
+        public BankAccountBuilder accountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
+            return this;
+        }
+
+        public BankAccountBuilder balance(Double balance) {
+            this.balance = balance;
+            return this;
+        }
+
+        //Builder method
+
+        public BankAccount build(){
+            return new BankAccount(this);
+        }
+
+        // Getters of the builder
+
+        public Long getId() {
+            return id;
+        }
+
+        public BankAccountType getAccountType() {
+            return accountType;
+        }
+
+        public String getAccountNumber() {
+            return accountNumber;
+        }
+
+        public Double getBalance() {
+            return balance;
+        }
+    }
 }
 
 
