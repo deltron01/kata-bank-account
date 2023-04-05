@@ -1,6 +1,6 @@
 package com.kata.tech.api;
 
-import com.kata.tech.openapi.BankAccountDTO;
+
 import com.kata.tech.openapi.BankAccountDepositDTO;
 import com.kata.tech.openapi.BankAccountWithdrawDTO;
 import com.kata.tech.openapi.BankUserDTO;

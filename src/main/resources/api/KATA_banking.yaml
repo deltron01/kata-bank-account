@@ -123,7 +123,7 @@ paths:
       description: Find BankAccounts by owner.
       operationId: findBankAccountsByOwner
       requestBody:
-        description: deposit an amount into existing bankAccount
+        description: Find BankAccounts by owner
         content:
           application/json:
             schema:
